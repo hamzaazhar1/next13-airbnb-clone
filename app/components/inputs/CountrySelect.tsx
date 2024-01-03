@@ -4,6 +4,14 @@ import Select from 'react-select'
 
 import useCountries from '@/app/hooks/useCountries';
 
+export type CityselectValue={
+  value:string,
+  name:string,
+  label:string,
+  latlng:number[],
+  region:string,
+}
+
 export type CountrySelectValue = {
   flag: string;
   label: string;
@@ -16,8 +24,12 @@ interface CountrySelectProps {
   value?: CountrySelectValue;
   onChange: (value: CountrySelectValue) => void;
 }
+interface CitySelectProps {
+  value?: CityselectValue;
+  onChange: (value: CityselectValue) => void;
+}
 
-const CountrySelect: React.FC<CountrySelectProps> = ({
+const CountrySelect: React.FC<CitySelectProps> = ({
   value,
   onChange
 }) => {
@@ -30,16 +42,17 @@ const CountrySelect: React.FC<CountrySelectProps> = ({
         isClearable
         options={getAll()}
         value={value}
-        onChange={(value) => onChange(value as CountrySelectValue)}
+        onChange={(value) => onChange(value as CityselectValue)}
         formatOptionLabel={(option: any) => (
           <div className="
           flex flex-row items-center gap-3">
             <div>{option.flag}</div>
             <div>
-              {option.label},
-              <span className="text-neutral-500 ml-1">
+              {option.label}
+              {/* , */}
+              {/* <span className="text-neutral-500 ml-1">
                 {option.region}
-              </span>
+              </span> */}
             </div>
           </div>
         )}

@@ -1,4 +1,12 @@
 import countries from 'world-countries';
+import {City} from "country-state-city"
+const formattedCities = City.getCitiesOfCountry("PK")?.map((country)=>({
+  value:country.name,
+  name:country.name,
+  label:country.name,
+  latlng:[country.latitude,country.longitude],
+  region:country.stateCode,
+}));
 
 const formattedCountries = countries.map((country) => ({
   value: country.cca2,
@@ -9,10 +17,10 @@ const formattedCountries = countries.map((country) => ({
 }));
 
 const useCountries = () => {
-  const getAll = () => formattedCountries;
+  const getAll = () => formattedCities;
 
   const getByValue = (value: string) => {
-    return formattedCountries.find((item) => item.value === value);
+    return formattedCities?.find((item) => item.name === value);
   }
 
   return {
